@@ -6,8 +6,8 @@ import datetime
 import random
 import xlrd
 import time
-from  XserverTest.Readexlx import getOnelinedata
-from XserverTest.Readexlx import getnrow
+from  XserverTest.Readxslx import getOnelinedata
+from XserverTest.Readxslx import getnrow
 worduse = []
 
 

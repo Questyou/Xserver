@@ -2,11 +2,11 @@ from selenium import webdriver
 import time
 import xlwt
 from selenium.webdriver import  ActionChains
-from XserverTest import  Readexlx
+from XserverTest import  Readxslx
 import xlrd
 import re
 
-firstRow = Readexlx.table.row_values(0)
+firstRow = Readxslx.table.row_values(0)
 
 
-print(shouhang[0])
+print(firstRow[0])
