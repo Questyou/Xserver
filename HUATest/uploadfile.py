@@ -14,8 +14,6 @@ def login(url):
 
 
 
-
-
 def upload(url):
     # url = 'http://172.17.13.172:12580/xserver/station/uploadStationPictures?stationId=1160'
 
@@ -48,8 +46,6 @@ def getstartionlist(url):
     }
     res1 = requests.request(method= "post" , url = url  , data =data , headers = headers)
     print(res1)
-
-
 
 
 upload('http://172.17.13.172:12580/xserver/station/uploadStationPictures?stationId=1160')
