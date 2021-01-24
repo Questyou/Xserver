@@ -1,13 +1,12 @@
-import  requests  , os
+import  requests  , os , time
 
 from moviepy.editor import VideoFileClip
 
-path = 'E:\\STE\\Xserver\\Xserver2.7\\ADSample\\'
+path = 'E:\\STE\\Xserver\\Xserver2.7\\ADSample\\jiangxi\\'
 addsampleurl = 'http://172.17.13.173:12521/advertisementSample/saveOrUpdateAdvertisementSample'
 token = '8a8af3a3-64cb-48b5-84f0-800370c05261'
 
-
-filename123 = "E:\\STE\\Xserver\\Xserver2.7\\ADSample\\anquanjiashi.mp4"
+filename123 = "E:\\STE\\Xserver\\Xserver2.7\\ADSample\\jiangxi\\奥利奥.mp4"
 
 def get_file_times(filename):
     clip = VideoFileClip(filename)
@@ -15,36 +14,36 @@ def get_file_times(filename):
     file_time_ms = int(file_time * 1000 )
     return  file_time_ms
 
-
-
-
-def get_file_nameTest(path):
-    # names = os.fchdir(path)
-    # for name in names:
-        #获取到文件路径
-    filepath = path
-        # 打开文件
-    file = {'file': open(filepath, 'rb')}
-        #获取样本时长时间  毫秒
-    sample_time =  get_file_times(filepath)
-        #添加样本
-    add_samples(addsampleurl, "anquanjiashi" , file, sample_time)
-    print("完成样本" + "anquanjiashi" + "添加！" )
+# def get_file_nameTest(path):
+#     # names = os.fchdir(path)
+#     # for name in names:
+#         #获取到文件路径
+#     filepath = path
+#         # 打开文件
+#     file = {'file': open(filepath, 'rb')}
+#         #获取样本时长时间  毫秒
+#     sample_time =  get_file_times(filepath)
+#         #添加样本
+#     add_samples(addsampleurl, "奥利奥" , file, sample_time)
+#     print("完成样本" + "奥利奥" + "添加！" )
 
 def get_file_name(fielpath):
     names = os.listdir(fielpath)
     for name in names:
         #获取到文件路径
         filepath = path + name
+        #获取实际名称
+        realname = name.split(".")
+        # print(realname[0])
         # 打开文件
         file = {'file': open(filepath, 'rb')}
         #获取样本时长时间  毫秒
         sample_time =  get_file_times(filepath)
         #添加样本
-        add_samples(addsampleurl, name , file, sample_time)
-        print("完成样本" + name + "添加！" )
+        add_samples(addsampleurl, realname[0] , file, sample_time)
+        print("完成样本" + realname[0] + "添加！" )
 
-def add_samples(url , samplename ,files , durationms):
+def add_samples(url , samplename ,files , duration_ms):
 
     headers = {
         'token' :  token
@@ -60,7 +59,7 @@ def add_samples(url , samplename ,files , durationms):
         "sourceServiceId" : 4921 ,
         "startTime" :  "2020-10-12" ,
         "endTime" : "2029-10-01" ,
-        "duration": durationms,
+        "duration": duration_ms,
         "sourceStartTime" : "2020-10-30 15:00:00" ,
         "sourceEndTime" : "2020-10-30 15:00:30" ,
         "remark"  : "样本添加",
@@ -68,12 +67,15 @@ def add_samples(url , samplename ,files , durationms):
         "back": 0
     }
     res = requests.post(url , data  = sample_data , files = files , headers = headers)
+    time.sleep(3)
     print(res.text)
 
+# get_file_nameTest(filename123)
 get_file_name(path)
 
-# get_file_nameT(filename123)
 
+
+# get_file_nameT(filename123)
 # import  requests , os
 #
 #
